@@ -4,11 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:api/api.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.dart';
-import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 
 part 'client.g.dart';
+
+const maxAgeOption = 'maxAge';
 
 @singleton
 class CoingeckoClient {
@@ -61,8 +62,6 @@ class CacheInterceptor extends Interceptor {
         : handler.next(options);
   }
 }
-
-const maxAgeOption = 'maxAge';
 
 @injectable
 @RestApi(baseUrl: 'https://api.coingecko.com/api/v3')

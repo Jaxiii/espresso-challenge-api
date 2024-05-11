@@ -5,8 +5,7 @@ void main() async {
   CoinsClient client = CoinsClient(await CoingeckoClient.init());
 
   test('getCoinsList', () async {
-    final coinsList = await client.getCoinsList('<API-KEY', true);
-    print(coinsList);
+    final coinsList = await client.getCoinsList('<API-KEY>', true);
     assert(coinsList.isNotEmpty);
   });
 
