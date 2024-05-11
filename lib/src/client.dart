@@ -1,15 +1,14 @@
 import 'dart:io';
 
-import 'package:api/src/dto/get_historical_prices.dart';
-import 'package:dio/dio.dart';
 import 'package:api/api.dart';
+import 'package:api/src/dto/get_coin_data.dart';
+import 'package:api/src/dto/get_historical_prices.dart';
+import 'package:api/src/dto/get_price.dart';
+import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.dart';
-import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
-
-import 'dto/get_coin_data.dart';
-import 'dto/get_price.dart';
+import 'package:retrofit/retrofit.dart';
 
 part 'client.g.dart';
 
@@ -83,9 +82,9 @@ abstract class CoinsClient {
   @GET('/coins/list')
   @Extra({maxAgeOption: Duration(seconds: 10)})
   Future<List<CoinMapDto>> getCoinsList(
-    @Header('x-cg-demo-api-key') String key,
-    @Query('include_platform', encoded: true) bool includePlatform,
-  );
+    @Header('x-cg-demo-api-key') String key, {
+    @Query('include_platform', encoded: true) required bool includePlatform,
+  });
 
   @GET('/coins/markets')
   @Extra({maxAgeOption: Duration(seconds: 10)})

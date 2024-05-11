@@ -9,7 +9,7 @@ class CoinMapDto with _$CoinMapDto {
     required String id,
     required String symbol,
     required String name,
-    required Map? platforms,
+    required Map<String, dynamic>? platforms,
   }) = _CoinMapDto;
 
   const CoinMapDto._();

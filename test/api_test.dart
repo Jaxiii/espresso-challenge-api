@@ -1,10 +1,10 @@
+import 'package:api/api.dart';
 import 'package:api/src/dto/get_coin_data.dart';
 import 'package:api/src/dto/get_historical_prices.dart';
 import 'package:api/src/dto/get_price.dart';
 import 'package:dio/dio.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:test/test.dart';
-import 'package:api/api.dart';
 
 /* 
 ##
@@ -36,51 +36,78 @@ void main() {
       client = CoinsClient(coingeckoClient);
     });
 
-    tearDown(() async => await coingeckoClient.dispose());
+    tearDown(() async => coingeckoClient.dispose());
 
     test('Fetch coin list and expect non-empty result', () async {
-      List<CoinMapDto> coinsList = await client.getCoinsList('<API-KEY>', true);
-      expect(coinsList, isNotEmpty,
-          reason: 'The coin list should not be empty');
+      final List<CoinMapDto> coinsList =
+          await client.getCoinsList('<API-KEY>', includePlatform: true);
+      expect(
+        coinsList,
+        isNotEmpty,
+        reason: 'The coin list should not be empty',
+      );
     });
 
     test('Verify the first item in the coin list matches expected id',
         () async {
-      List<CoinMapDto> coinsList = await client.getCoinsList('<API-KEY>', true);
-      String expectedFirstCoinId = '01coin';
-      expect(coinsList.first.id, equals(expectedFirstCoinId),
-          reason: 'The first coin ID should match the expected value');
+      final List<CoinMapDto> coinsList =
+          await client.getCoinsList('<API-KEY>', includePlatform: true);
+      const String expectedFirstCoinId = '01coin';
+      expect(
+        coinsList.first.id,
+        equals(expectedFirstCoinId),
+        reason: 'The first coin ID should match the expected value',
+      );
     });
 
     test('Fetch price of Bitcoin in USD and validate structure', () async {
-      PriceRequestDto requestDto =
+      const PriceRequestDto requestDto =
           PriceRequestDto(ids: ['bitcoin'], vsCurrencies: ['usd']);
-      Map<String, PriceMapDto> priceResponse =
+      final Map<String, PriceMapDto> priceResponse =
           await client.getPrices('<API-KEY>', requestDto);
-      expect(priceResponse, contains('bitcoin'),
-          reason: 'The response should contain data for bitcoin');
-      expect(priceResponse['bitcoin']!.usd, isNotNull,
-          reason: 'The USD price for bitcoin should be present');
-      expect(priceResponse['bitcoin']!.eur, isNull,
-          reason: 'The EUR price for bitcoin should be absent');
+      expect(
+        priceResponse,
+        contains('bitcoin'),
+        reason: 'The response should contain data for bitcoin',
+      );
+      expect(
+        priceResponse['bitcoin']!.usd,
+        isNotNull,
+        reason: 'The USD price for bitcoin should be present',
+      );
+      expect(
+        priceResponse['bitcoin']!.eur,
+        isNull,
+        reason: 'The EUR price for bitcoin should be absent',
+      );
     });
 
     test('Fetch historical prices of Bitcoin and validate content', () async {
-      HistoricalPricesRequestDto requestDto =
+      const HistoricalPricesRequestDto requestDto =
           HistoricalPricesRequestDto(vsCurrency: 'usd', days: '1');
-      HistoricalPricesMapDto historicalPricesResponse =
+      final HistoricalPricesMapDto historicalPricesResponse =
           await client.getHistoricalPrices('<API-KEY>', 'bitcoin', requestDto);
-      expect(historicalPricesResponse.prices, isNotEmpty,
-          reason: 'Historical prices should be available');
-      expect(historicalPricesResponse.marketCaps, isNotEmpty,
-          reason: 'Market cap data should be available');
-      expect(historicalPricesResponse.totalVolumes, isNotEmpty,
-          reason: 'Total volume data should be available');
+      expect(
+        historicalPricesResponse.prices,
+        isNotEmpty,
+        reason: 'Historical prices should be available',
+      );
+      expect(
+        historicalPricesResponse.marketCaps,
+        isNotEmpty,
+        reason: 'Market cap data should be available',
+      );
+      expect(
+        historicalPricesResponse.totalVolumes,
+        isNotEmpty,
+        reason: 'Total volume data should be available',
+      );
     });
 
     test('Fetch detailed coin data and check response', () async {
-      CoinDataRequestDto requestDto = CoinDataRequestDto(vsCurrency: 'usd');
-      List<CoinDataMapDto> coinDataResponse =
+      const CoinDataRequestDto requestDto =
+          CoinDataRequestDto(vsCurrency: 'usd');
+      final List<CoinDataMapDto> coinDataResponse =
           await client.getCoinData('<API-KEY>', requestDto);
       expect(coinDataResponse, isNotEmpty);
     });
@@ -107,16 +134,20 @@ void main() {
       );
 
       try {
-        print(await client.getCoinsList('<API-KEY>', true));
         fail('Should have thrown a DioException');
-      } catch (e) {
+      } on DioException catch (e) {
         expect(e, isA<DioException>(), reason: 'Expected a DioException');
-        var dioException = e as DioException;
-        expect(dioException.error, isA<EspressoCashException>(),
-            reason: 'The error should be an EspressoCashException');
-        var espressoException = dioException.error as EspressoCashException;
-        expect(espressoException.error, equals(EspressoCashError.genericError),
-            reason: 'The error type should be genericError');
+        expect(
+          e.error,
+          isA<EspressoCashException>(),
+          reason: 'The error should be an EspressoCashException',
+        );
+        final espressoException = e.error! as EspressoCashException;
+        expect(
+          espressoException.error,
+          equals(EspressoCashError.genericError),
+          reason: 'The error type should be genericError',
+        );
       }
     });
 
@@ -129,16 +160,22 @@ void main() {
       );
 
       try {
-        await client.getCoinsList('<API-KEY>', true);
+        await client.getCoinsList('<API-KEY>', includePlatform: true);
         fail('Should have thrown an EspressoCashException on 500 error');
-      } catch (e) {
+      } on DioException catch (e) {
         expect(e, isA<DioException>(), reason: 'Expected a DioException');
-        var dioException = e as DioException;
-        expect(dioException.error, isA<EspressoCashException>(),
-            reason: 'The error should be an EspressoCashException');
-        var espressoException = dioException.error as EspressoCashException;
-        expect(espressoException.error, equals(EspressoCashError.genericError),
-            reason: 'The error type should be genericError');
+        final dioException = e;
+        expect(
+          dioException.error,
+          isA<EspressoCashException>(),
+          reason: 'The error should be an EspressoCashException',
+        );
+        final espressoException = dioException.error! as EspressoCashException;
+        expect(
+          espressoException.error,
+          equals(EspressoCashError.genericError),
+          reason: 'The error type should be genericError',
+        );
       }
     });
 
@@ -152,19 +189,27 @@ void main() {
       );
 
       try {
-        await client.getCoinsList('<API-KEY>', true);
+        await client.getCoinsList('<API-KEY>', includePlatform: true);
         fail('Should have thrown an exception on network failure');
-      } catch (e) {
-        expect(e, isA<DioException>(),
-            reason: 'Expected a DioException due to network failure');
-        var dioException = e as DioException;
-        expect(dioException.error, isA<EspressoCashException>(),
-            reason:
-                'The error should be an EspressoCashException due to network failure');
-        var espressoException = dioException.error as EspressoCashException;
-        expect(espressoException.error, equals(EspressoCashError.genericError),
-            reason:
-                'The error type should reflect a network failure condition');
+      } on DioException catch (e) {
+        expect(
+          e,
+          isA<DioException>(),
+          reason: 'Expected a DioException due to network failure',
+        );
+        final dioException = e;
+        expect(
+          dioException.error,
+          isA<EspressoCashException>(),
+          reason:
+              'The error should be an EspressoCashException due to network failure',
+        );
+        final espressoException = dioException.error! as EspressoCashException;
+        expect(
+          espressoException.error,
+          equals(EspressoCashError.genericError),
+          reason: 'The error type should reflect a network failure condition',
+        );
       }
     });
   });

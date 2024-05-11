@@ -10,7 +10,6 @@ class ErrorInterceptor extends Interceptor {
     switch (err.response?.statusCode) {
       case 404:
         errorType = EspressoCashError.genericError;
-        break;
       default:
         errorType = EspressoCashError.genericError;
     }
@@ -18,10 +17,12 @@ class ErrorInterceptor extends Interceptor {
     final customException = EspressoCashException(error: errorType);
 
     // Use the handler to properly manage the lifecycle of the error
-    handler.reject(DioException(
-      requestOptions: err.requestOptions,
-      error: customException,
-    ));
+    handler.reject(
+      DioException(
+        requestOptions: err.requestOptions,
+        error: customException,
+      ),
+    );
   }
 }
 
