@@ -4,27 +4,27 @@ part 'get_price.freezed.dart';
 part 'get_price.g.dart';
 
 @freezed
-class PricesMapDto with _$PricesMapDto {
-  const factory PricesMapDto({
+class PriceMapDto with _$PriceMapDto {
+  const factory PriceMapDto({
     double? usd,
     double? eur,
-  }) = _PricesMapDto;
+  }) = _PriceMapDto;
 
-  const PricesMapDto._();
+  const PriceMapDto._();
 
-  factory PricesMapDto.fromJson(Map<String, dynamic> data) =>
-      _$PricesMapDtoFromJson(data);
+  factory PriceMapDto.fromJson(Map<String, dynamic> data) =>
+      _$PriceMapDtoFromJson(data);
 }
 
 @freezed
-class RateRequestDto with _$RateRequestDto {
+class PriceRequestDto with _$PriceRequestDto {
   // ignore: invalid_annotation_target, it's valid
   @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory RateRequestDto({
+  const factory PriceRequestDto({
     required List<String> ids,
     required List<String> vsCurrencies,
-  }) = _RateRequestDto;
+  }) = _PriceRequestDto;
 
-  factory RateRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$RateRequestDtoFromJson(json);
+  factory PriceRequestDto.fromJson(Map<String, dynamic> json) =>
+      _$PriceRequestDtoFromJson(json);
 }

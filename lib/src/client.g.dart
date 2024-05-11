@@ -60,9 +60,9 @@ class _CoinsClient implements CoinsClient {
   }
 
   @override
-  Future<Map<String, PricesMapDto>> getPrices(
+  Future<Map<String, PriceMapDto>> getPrices(
     String key,
-    RateRequestDto request,
+    PriceRequestDto request,
   ) async {
     final _extra = <String, dynamic>{
       'maxAge': Duration(
@@ -75,7 +75,7 @@ class _CoinsClient implements CoinsClient {
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Map<String, PricesMapDto>>(Options(
+        _setStreamType<Map<String, PriceMapDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -92,7 +92,44 @@ class _CoinsClient implements CoinsClient {
               baseUrl,
             ))));
     var value = _result.data!.map((k, dynamic v) =>
-        MapEntry(k, PricesMapDto.fromJson(v as Map<String, dynamic>)));
+        MapEntry(k, PriceMapDto.fromJson(v as Map<String, dynamic>)));
+    return value;
+  }
+
+  @override
+  Future<HistoricalPricesMapDto> getHistoricalPrices(
+    String key,
+    String id,
+    HistoricalPricesRequestDto request,
+  ) async {
+    final _extra = <String, dynamic>{
+      'maxAge': Duration(
+        seconds: 10,
+      )
+    };
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(request.toJson());
+    final _headers = <String, dynamic>{r'x-cg-demo-api-key': key};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HistoricalPricesMapDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/coins/${id}/market_chart',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = HistoricalPricesMapDto.fromJson(_result.data!);
     return value;
   }
 

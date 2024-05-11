@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:api/src/dto/get_historical_prices.dart';
 import 'package:dio/dio.dart';
 import 'package:api/api.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -80,8 +81,16 @@ abstract class CoinsClient {
 
   @GET('/simple/price')
   @Extra({maxAgeOption: Duration(seconds: 10)})
-  Future<Map<String, PricesMapDto>> getPrices(
+  Future<Map<String, PriceMapDto>> getPrices(
     @Header('x-cg-demo-api-key') String key,
-    @Queries() RateRequestDto request,
+    @Queries() PriceRequestDto request,
+  );
+
+  @GET('/coins/{id}/market_chart')
+  @Extra({maxAgeOption: Duration(seconds: 10)})
+  Future<HistoricalPricesMapDto> getHistoricalPrices(
+    @Header('x-cg-demo-api-key') String key,
+    @Path('id') String id,
+    @Queries() HistoricalPricesRequestDto request,
   );
 }
