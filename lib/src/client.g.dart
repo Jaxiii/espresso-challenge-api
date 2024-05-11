@@ -60,6 +60,44 @@ class _CoinsClient implements CoinsClient {
   }
 
   @override
+  Future<List<CoinDataMapDto>> getCoinData(
+    String key,
+    CoinDataRequestDto request,
+  ) async {
+    final _extra = <String, dynamic>{
+      'maxAge': Duration(
+        seconds: 10,
+      )
+    };
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(request.toJson());
+    final _headers = <String, dynamic>{r'x-cg-demo-api-key': key};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<CoinDataMapDto>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/coins/markets',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => CoinDataMapDto.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<Map<String, PriceMapDto>> getPrices(
     String key,
     PriceRequestDto request,

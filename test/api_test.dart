@@ -1,3 +1,4 @@
+import 'package:api/src/dto/get_coin_data.dart';
 import 'package:api/src/dto/get_historical_prices.dart';
 import 'package:api/src/dto/get_price.dart';
 import 'package:test/test.dart';
@@ -36,5 +37,12 @@ void main() async {
     assert(historicalPricesResponse.prices.isNotEmpty);
     assert(historicalPricesResponse.marketCaps.isNotEmpty);
     assert(historicalPricesResponse.totalVolumes.isNotEmpty);
+  });
+
+  test('getCoinData', () async {
+    final CoinDataRequestDto requestDto = CoinDataRequestDto(vsCurrency: 'usd');
+    final List<CoinDataMapDto> coinDataResponse =
+        await client.getCoinData('<API-KEY>', requestDto);
+    print(coinDataResponse);
   });
 }
