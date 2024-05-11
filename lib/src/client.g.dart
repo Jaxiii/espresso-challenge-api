@@ -59,6 +59,43 @@ class _CoinsClient implements CoinsClient {
     return value;
   }
 
+  @override
+  Future<Map<String, PricesMapDto>> getPrices(
+    String key,
+    RateRequestDto request,
+  ) async {
+    final _extra = <String, dynamic>{
+      'maxAge': Duration(
+        seconds: 10,
+      )
+    };
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(request.toJson());
+    final _headers = <String, dynamic>{r'x-cg-demo-api-key': key};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Map<String, PricesMapDto>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/simple/price',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!.map((k, dynamic v) =>
+        MapEntry(k, PricesMapDto.fromJson(v as Map<String, dynamic>)));
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

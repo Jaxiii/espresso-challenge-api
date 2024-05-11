@@ -7,6 +7,8 @@ import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.da
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 
+import 'dto/get_price.dart';
+
 part 'client.g.dart';
 
 const maxAgeOption = 'maxAge';
@@ -74,5 +76,12 @@ abstract class CoinsClient {
   Future<List<CoinMapDto>> getCoinsList(
     @Header('x-cg-demo-api-key') String key,
     @Query('include_platform', encoded: true) bool includePlatform,
+  );
+
+  @GET('/simple/price')
+  @Extra({maxAgeOption: Duration(seconds: 10)})
+  Future<Map<String, PricesMapDto>> getPrices(
+    @Header('x-cg-demo-api-key') String key,
+    @Queries() RateRequestDto request,
   );
 }

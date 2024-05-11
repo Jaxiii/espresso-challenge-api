@@ -14,39 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-PriceDto _$PriceDtoFromJson(Map<String, dynamic> json) {
-  return _PriceDto.fromJson(json);
+PricesMapDto _$PricesMapDtoFromJson(Map<String, dynamic> json) {
+  return _PricesMapDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PriceDto {
-  String get id => throw _privateConstructorUsedError;
-  String get symbol => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  Map<dynamic, dynamic>? get platforms => throw _privateConstructorUsedError;
+mixin _$PricesMapDto {
+  double? get usd => throw _privateConstructorUsedError;
+  double? get eur => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PriceDtoCopyWith<PriceDto> get copyWith =>
+  $PricesMapDtoCopyWith<PricesMapDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PriceDtoCopyWith<$Res> {
-  factory $PriceDtoCopyWith(PriceDto value, $Res Function(PriceDto) then) =
-      _$PriceDtoCopyWithImpl<$Res, PriceDto>;
+abstract class $PricesMapDtoCopyWith<$Res> {
+  factory $PricesMapDtoCopyWith(
+          PricesMapDto value, $Res Function(PricesMapDto) then) =
+      _$PricesMapDtoCopyWithImpl<$Res, PricesMapDto>;
   @useResult
-  $Res call(
-      {String id,
-      String symbol,
-      String name,
-      Map<dynamic, dynamic>? platforms});
+  $Res call({double? usd, double? eur});
 }
 
 /// @nodoc
-class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
-    implements $PriceDtoCopyWith<$Res> {
-  _$PriceDtoCopyWithImpl(this._value, this._then);
+class _$PricesMapDtoCopyWithImpl<$Res, $Val extends PricesMapDto>
+    implements $PricesMapDtoCopyWith<$Res> {
+  _$PricesMapDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -56,171 +51,294 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? symbol = null,
-    Object? name = null,
-    Object? platforms = freezed,
+    Object? usd = freezed,
+    Object? eur = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      symbol: null == symbol
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      platforms: freezed == platforms
-          ? _value.platforms
-          : platforms // ignore: cast_nullable_to_non_nullable
-              as Map<dynamic, dynamic>?,
+      usd: freezed == usd
+          ? _value.usd
+          : usd // ignore: cast_nullable_to_non_nullable
+              as double?,
+      eur: freezed == eur
+          ? _value.eur
+          : eur // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$PriceDtoImplCopyWith<$Res>
-    implements $PriceDtoCopyWith<$Res> {
-  factory _$$PriceDtoImplCopyWith(
-          _$PriceDtoImpl value, $Res Function(_$PriceDtoImpl) then) =
-      __$$PriceDtoImplCopyWithImpl<$Res>;
+abstract class _$$PricesMapDtoImplCopyWith<$Res>
+    implements $PricesMapDtoCopyWith<$Res> {
+  factory _$$PricesMapDtoImplCopyWith(
+          _$PricesMapDtoImpl value, $Res Function(_$PricesMapDtoImpl) then) =
+      __$$PricesMapDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String symbol,
-      String name,
-      Map<dynamic, dynamic>? platforms});
+  $Res call({double? usd, double? eur});
 }
 
 /// @nodoc
-class __$$PriceDtoImplCopyWithImpl<$Res>
-    extends _$PriceDtoCopyWithImpl<$Res, _$PriceDtoImpl>
-    implements _$$PriceDtoImplCopyWith<$Res> {
-  __$$PriceDtoImplCopyWithImpl(
-      _$PriceDtoImpl _value, $Res Function(_$PriceDtoImpl) _then)
+class __$$PricesMapDtoImplCopyWithImpl<$Res>
+    extends _$PricesMapDtoCopyWithImpl<$Res, _$PricesMapDtoImpl>
+    implements _$$PricesMapDtoImplCopyWith<$Res> {
+  __$$PricesMapDtoImplCopyWithImpl(
+      _$PricesMapDtoImpl _value, $Res Function(_$PricesMapDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? symbol = null,
-    Object? name = null,
-    Object? platforms = freezed,
+    Object? usd = freezed,
+    Object? eur = freezed,
   }) {
-    return _then(_$PriceDtoImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      symbol: null == symbol
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      platforms: freezed == platforms
-          ? _value._platforms
-          : platforms // ignore: cast_nullable_to_non_nullable
-              as Map<dynamic, dynamic>?,
+    return _then(_$PricesMapDtoImpl(
+      usd: freezed == usd
+          ? _value.usd
+          : usd // ignore: cast_nullable_to_non_nullable
+              as double?,
+      eur: freezed == eur
+          ? _value.eur
+          : eur // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$PriceDtoImpl extends _PriceDto {
-  const _$PriceDtoImpl(
-      {required this.id,
-      required this.symbol,
-      required this.name,
-      required final Map<dynamic, dynamic>? platforms})
-      : _platforms = platforms,
-        super._();
+class _$PricesMapDtoImpl extends _PricesMapDto {
+  const _$PricesMapDtoImpl({this.usd, this.eur}) : super._();
 
-  factory _$PriceDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PriceDtoImplFromJson(json);
+  factory _$PricesMapDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PricesMapDtoImplFromJson(json);
 
   @override
-  final String id;
+  final double? usd;
   @override
-  final String symbol;
-  @override
-  final String name;
-  final Map<dynamic, dynamic>? _platforms;
-  @override
-  Map<dynamic, dynamic>? get platforms {
-    final value = _platforms;
-    if (value == null) return null;
-    if (_platforms is EqualUnmodifiableMapView) return _platforms;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
+  final double? eur;
 
   @override
   String toString() {
-    return 'PriceDto(id: $id, symbol: $symbol, name: $name, platforms: $platforms)';
+    return 'PricesMapDto(usd: $usd, eur: $eur)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PriceDtoImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.symbol, symbol) || other.symbol == symbol) &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other._platforms, _platforms));
+            other is _$PricesMapDtoImpl &&
+            (identical(other.usd, usd) || other.usd == usd) &&
+            (identical(other.eur, eur) || other.eur == eur));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, symbol, name,
-      const DeepCollectionEquality().hash(_platforms));
+  int get hashCode => Object.hash(runtimeType, usd, eur);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PriceDtoImplCopyWith<_$PriceDtoImpl> get copyWith =>
-      __$$PriceDtoImplCopyWithImpl<_$PriceDtoImpl>(this, _$identity);
+  _$$PricesMapDtoImplCopyWith<_$PricesMapDtoImpl> get copyWith =>
+      __$$PricesMapDtoImplCopyWithImpl<_$PricesMapDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PriceDtoImplToJson(
+    return _$$PricesMapDtoImplToJson(
       this,
     );
   }
 }
 
-abstract class _PriceDto extends PriceDto {
-  const factory _PriceDto(
-      {required final String id,
-      required final String symbol,
-      required final String name,
-      required final Map<dynamic, dynamic>? platforms}) = _$PriceDtoImpl;
-  const _PriceDto._() : super._();
+abstract class _PricesMapDto extends PricesMapDto {
+  const factory _PricesMapDto({final double? usd, final double? eur}) =
+      _$PricesMapDtoImpl;
+  const _PricesMapDto._() : super._();
 
-  factory _PriceDto.fromJson(Map<String, dynamic> json) =
-      _$PriceDtoImpl.fromJson;
+  factory _PricesMapDto.fromJson(Map<String, dynamic> json) =
+      _$PricesMapDtoImpl.fromJson;
 
   @override
-  String get id;
+  double? get usd;
   @override
-  String get symbol;
-  @override
-  String get name;
-  @override
-  Map<dynamic, dynamic>? get platforms;
+  double? get eur;
   @override
   @JsonKey(ignore: true)
-  _$$PriceDtoImplCopyWith<_$PriceDtoImpl> get copyWith =>
+  _$$PricesMapDtoImplCopyWith<_$PricesMapDtoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+RateRequestDto _$RateRequestDtoFromJson(Map<String, dynamic> json) {
+  return _RateRequestDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$RateRequestDto {
+  List<String> get ids => throw _privateConstructorUsedError;
+  List<String> get vsCurrencies => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RateRequestDtoCopyWith<RateRequestDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RateRequestDtoCopyWith<$Res> {
+  factory $RateRequestDtoCopyWith(
+          RateRequestDto value, $Res Function(RateRequestDto) then) =
+      _$RateRequestDtoCopyWithImpl<$Res, RateRequestDto>;
+  @useResult
+  $Res call({List<String> ids, List<String> vsCurrencies});
+}
+
+/// @nodoc
+class _$RateRequestDtoCopyWithImpl<$Res, $Val extends RateRequestDto>
+    implements $RateRequestDtoCopyWith<$Res> {
+  _$RateRequestDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ids = null,
+    Object? vsCurrencies = null,
+  }) {
+    return _then(_value.copyWith(
+      ids: null == ids
+          ? _value.ids
+          : ids // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      vsCurrencies: null == vsCurrencies
+          ? _value.vsCurrencies
+          : vsCurrencies // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$RateRequestDtoImplCopyWith<$Res>
+    implements $RateRequestDtoCopyWith<$Res> {
+  factory _$$RateRequestDtoImplCopyWith(_$RateRequestDtoImpl value,
+          $Res Function(_$RateRequestDtoImpl) then) =
+      __$$RateRequestDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<String> ids, List<String> vsCurrencies});
+}
+
+/// @nodoc
+class __$$RateRequestDtoImplCopyWithImpl<$Res>
+    extends _$RateRequestDtoCopyWithImpl<$Res, _$RateRequestDtoImpl>
+    implements _$$RateRequestDtoImplCopyWith<$Res> {
+  __$$RateRequestDtoImplCopyWithImpl(
+      _$RateRequestDtoImpl _value, $Res Function(_$RateRequestDtoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ids = null,
+    Object? vsCurrencies = null,
+  }) {
+    return _then(_$RateRequestDtoImpl(
+      ids: null == ids
+          ? _value._ids
+          : ids // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      vsCurrencies: null == vsCurrencies
+          ? _value._vsCurrencies
+          : vsCurrencies // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$RateRequestDtoImpl implements _RateRequestDto {
+  const _$RateRequestDtoImpl(
+      {required final List<String> ids,
+      required final List<String> vsCurrencies})
+      : _ids = ids,
+        _vsCurrencies = vsCurrencies;
+
+  factory _$RateRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RateRequestDtoImplFromJson(json);
+
+  final List<String> _ids;
+  @override
+  List<String> get ids {
+    if (_ids is EqualUnmodifiableListView) return _ids;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_ids);
+  }
+
+  final List<String> _vsCurrencies;
+  @override
+  List<String> get vsCurrencies {
+    if (_vsCurrencies is EqualUnmodifiableListView) return _vsCurrencies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_vsCurrencies);
+  }
+
+  @override
+  String toString() {
+    return 'RateRequestDto(ids: $ids, vsCurrencies: $vsCurrencies)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RateRequestDtoImpl &&
+            const DeepCollectionEquality().equals(other._ids, _ids) &&
+            const DeepCollectionEquality()
+                .equals(other._vsCurrencies, _vsCurrencies));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_ids),
+      const DeepCollectionEquality().hash(_vsCurrencies));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RateRequestDtoImplCopyWith<_$RateRequestDtoImpl> get copyWith =>
+      __$$RateRequestDtoImplCopyWithImpl<_$RateRequestDtoImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RateRequestDtoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _RateRequestDto implements RateRequestDto {
+  const factory _RateRequestDto(
+      {required final List<String> ids,
+      required final List<String> vsCurrencies}) = _$RateRequestDtoImpl;
+
+  factory _RateRequestDto.fromJson(Map<String, dynamic> json) =
+      _$RateRequestDtoImpl.fromJson;
+
+  @override
+  List<String> get ids;
+  @override
+  List<String> get vsCurrencies;
+  @override
+  @JsonKey(ignore: true)
+  _$$RateRequestDtoImplCopyWith<_$RateRequestDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
