@@ -11,6 +11,7 @@ part of 'client.dart';
 class _CoinsClient implements CoinsClient {
   _CoinsClient(
     this._dio, {
+    // ignore: unused_element, it may be injected
     this.baseUrl,
   }) {
     baseUrl ??= 'https://api.coingecko.com/api/v3';

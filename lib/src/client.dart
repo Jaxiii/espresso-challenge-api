@@ -22,9 +22,15 @@ class CoingeckoClient {
   final Dio dio;
   final CacheOptions options;
 
+  Future<void> dispose() async {
+    dio.interceptors.clear(); // Remove all interceptors
+    await options.store?.close(); // Close the cache store if it is available
+    dio.close(); // Close the Dio instance to free up any associated resources
+  }
+
   @factoryMethod
   @preResolve
-  static Future<CoingeckoClient> init() async {
+  static Future<CoingeckoClient> init({Dio? externalDio}) async {
     final directory = Directory.systemTemp;
 
     final options = CacheOptions(
@@ -32,10 +38,11 @@ class CoingeckoClient {
       policy: CachePolicy.refreshForceCache,
     );
 
-    final dio = Dio()
+    final dio = externalDio ?? Dio()
       ..interceptors.addAll([
         CacheInterceptor(options: options),
         DioCacheInterceptor(options: options),
+        ErrorInterceptor(),
       ])
       ..options.listFormat = ListFormat.csv;
 
