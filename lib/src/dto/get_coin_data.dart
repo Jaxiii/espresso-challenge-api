@@ -23,6 +23,7 @@ class CoinDataRequestDto with _$CoinDataRequestDto {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory CoinDataRequestDto({
     required String vsCurrency,
+    int? page,
   }) = _CoinDataRequestDto;
   factory CoinDataRequestDto.fromJson(Map<String, dynamic> json) =>
       _$CoinDataRequestDtoFromJson(json);

@@ -25,10 +25,12 @@ _$CoinDataRequestDtoImpl _$$CoinDataRequestDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$CoinDataRequestDtoImpl(
       vsCurrency: json['vs_currency'] as String,
+      page: (json['page'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$CoinDataRequestDtoImplToJson(
         _$CoinDataRequestDtoImpl instance) =>
     <String, dynamic>{
       'vs_currency': instance.vsCurrency,
+      'page': instance.page,
     };
