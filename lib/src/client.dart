@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:api/api.dart';
-import 'package:api/src/dto/get_coin_data.dart';
+import 'package:api/src/dto/get_coins.dart';
 import 'package:api/src/dto/get_historical_prices.dart';
 import 'package:api/src/dto/get_price.dart';
 import 'package:dio/dio.dart';
@@ -29,7 +29,8 @@ class CoingeckoClient {
 
   @factoryMethod
   @preResolve
-  static Future<CoingeckoClient> init({Dio? externalDio}) async {
+  // ignore: prefer_constructors_over_static_methods
+  static CoingeckoClient init({Dio? externalDio}) {
     final directory = Directory.systemTemp;
 
     final options = CacheOptions(

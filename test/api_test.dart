@@ -1,5 +1,5 @@
 import 'package:api/api.dart';
-import 'package:api/src/dto/get_coin_data.dart';
+import 'package:api/src/dto/get_coins.dart';
 import 'package:api/src/dto/get_historical_prices.dart';
 import 'package:api/src/dto/get_price.dart';
 import 'package:dio/dio.dart';
@@ -32,7 +32,7 @@ void main() {
 
   group('Successful API Calls', tags: 'successful', () {
     setUp(() async {
-      coingeckoClient = await CoingeckoClient.init();
+      coingeckoClient = CoingeckoClient.init();
       client = CoinsClient(coingeckoClient);
     });
 
@@ -117,7 +117,7 @@ void main() {
     setUp(() async {
       dioAdapter = DioAdapter(dio: dio);
       dio.httpClientAdapter = dioAdapter;
-      coingeckoClient = await CoingeckoClient.init(externalDio: dio);
+      coingeckoClient = CoingeckoClient.init(externalDio: dio);
       client = CoinsClient(coingeckoClient);
     });
 

@@ -23,7 +23,7 @@ mixin _$CoinMapDto {
   String get id => throw _privateConstructorUsedError;
   String get symbol => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  Map<dynamic, dynamic>? get platforms => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get platforms => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,10 +38,7 @@ abstract class $CoinMapDtoCopyWith<$Res> {
       _$CoinMapDtoCopyWithImpl<$Res, CoinMapDto>;
   @useResult
   $Res call(
-      {String id,
-      String symbol,
-      String name,
-      Map<dynamic, dynamic>? platforms});
+      {String id, String symbol, String name, Map<String, dynamic>? platforms});
 }
 
 /// @nodoc
@@ -78,7 +75,7 @@ class _$CoinMapDtoCopyWithImpl<$Res, $Val extends CoinMapDto>
       platforms: freezed == platforms
           ? _value.platforms
           : platforms // ignore: cast_nullable_to_non_nullable
-              as Map<dynamic, dynamic>?,
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -92,10 +89,7 @@ abstract class _$$CoinMapDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String symbol,
-      String name,
-      Map<dynamic, dynamic>? platforms});
+      {String id, String symbol, String name, Map<String, dynamic>? platforms});
 }
 
 /// @nodoc
@@ -130,7 +124,7 @@ class __$$CoinMapDtoImplCopyWithImpl<$Res>
       platforms: freezed == platforms
           ? _value._platforms
           : platforms // ignore: cast_nullable_to_non_nullable
-              as Map<dynamic, dynamic>?,
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -142,7 +136,7 @@ class _$CoinMapDtoImpl extends _CoinMapDto {
       {required this.id,
       required this.symbol,
       required this.name,
-      required final Map<dynamic, dynamic>? platforms})
+      required final Map<String, dynamic>? platforms})
       : _platforms = platforms,
         super._();
 
@@ -155,9 +149,9 @@ class _$CoinMapDtoImpl extends _CoinMapDto {
   final String symbol;
   @override
   final String name;
-  final Map<dynamic, dynamic>? _platforms;
+  final Map<String, dynamic>? _platforms;
   @override
-  Map<dynamic, dynamic>? get platforms {
+  Map<String, dynamic>? get platforms {
     final value = _platforms;
     if (value == null) return null;
     if (_platforms is EqualUnmodifiableMapView) return _platforms;
@@ -206,7 +200,7 @@ abstract class _CoinMapDto extends CoinMapDto {
       {required final String id,
       required final String symbol,
       required final String name,
-      required final Map<dynamic, dynamic>? platforms}) = _$CoinMapDtoImpl;
+      required final Map<String, dynamic>? platforms}) = _$CoinMapDtoImpl;
   const _CoinMapDto._() : super._();
 
   factory _CoinMapDto.fromJson(Map<String, dynamic> json) =
@@ -219,7 +213,7 @@ abstract class _CoinMapDto extends CoinMapDto {
   @override
   String get name;
   @override
-  Map<dynamic, dynamic>? get platforms;
+  Map<String, dynamic>? get platforms;
   @override
   @JsonKey(ignore: true)
   _$$CoinMapDtoImplCopyWith<_$CoinMapDtoImpl> get copyWith =>
