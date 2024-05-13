@@ -15,7 +15,6 @@ dependencies:
   injectable: ^2.4.1
   json_annotation: ^4.9.0
   retrofit: ^4.1.0
-
   
 dev_dependencies:
   build_runner: ^2.4.9
