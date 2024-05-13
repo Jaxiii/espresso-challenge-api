@@ -171,7 +171,7 @@ class _CoinsClient implements CoinsClient {
   }
 
   @override
-  Future<Map<String, PriceMapDto>> getPrices(
+  Future<Map<String, PriceMapDto>> getPrice(
     String key,
     PriceRequestDto request,
   ) async {

@@ -67,7 +67,7 @@ void main() {
       const PriceRequestDto requestDto =
           PriceRequestDto(ids: ['bitcoin'], vsCurrencies: ['usd']);
       final Map<String, PriceMapDto> priceResponse =
-          await client.getPrices('<API-KEY>', requestDto);
+          await client.getPrice('<API-KEY>', requestDto);
       expect(
         priceResponse,
         contains('bitcoin'),
@@ -186,8 +186,7 @@ void main() {
     test('Handle network failure gracefully', () async {
       dioAdapter.onGet(
         'https://api.coingecko.com/api/v3/coins/list',
-        (server) =>
-            server.reply(0, 'Failed to connect'), // Simulating network failure
+        (server) => server.reply(0, 'Failed to connect'),
         headers: {'x-cg-demo-api-key': '<API-KEY>'},
         queryParameters: {'include_platform': true},
       );

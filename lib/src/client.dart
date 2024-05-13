@@ -19,9 +19,9 @@ class CoingeckoClient {
   final CacheOptions options;
 
   Future<void> dispose() async {
-    dio.interceptors.clear(); // Remove all interceptors
-    await options.store?.close(); // Close the cache store if it is available
-    dio.close(); // Close the Dio instance to free up any associated resources
+    dio.interceptors.clear();
+    await options.store?.close();
+    dio.close();
   }
 
   @factoryMethod
@@ -108,7 +108,7 @@ abstract class CoinsClient {
 
   @GET('/simple/price')
   @Extra({maxAgeOption: Duration(seconds: 10)})
-  Future<Map<String, PriceMapDto>> getPrices(
+  Future<Map<String, PriceMapDto>> getPrice(
     @Header('x-cg-demo-api-key') String key,
     @Queries() PriceRequestDto request,
   );

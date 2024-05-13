@@ -27,10 +27,8 @@ class ErrorInterceptor extends Interceptor {
       default:
         errorType = EspressoCashError.generic;
     }
-    // Create your custom exception
     final customException = EspressoCashException(error: errorType);
 
-    // Use the handler to properly manage the lifecycle of the error
     handler.reject(
       DioException(
         requestOptions: err.requestOptions,
