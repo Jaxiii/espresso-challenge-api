@@ -23,6 +23,7 @@ mixin _$CoinDataMapDto {
   String get id => throw _privateConstructorUsedError;
   String get symbol => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Map<String, dynamic> get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,11 @@ abstract class $CoinDataMapDtoCopyWith<$Res> {
           CoinDataMapDto value, $Res Function(CoinDataMapDto) then) =
       _$CoinDataMapDtoCopyWithImpl<$Res, CoinDataMapDto>;
   @useResult
-  $Res call({String id, String symbol, String name});
+  $Res call(
+      {String id,
+      String symbol,
+      String name,
+      Map<String, dynamic> description});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$CoinDataMapDtoCopyWithImpl<$Res, $Val extends CoinDataMapDto>
     Object? id = null,
     Object? symbol = null,
     Object? name = null,
+    Object? description = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -69,6 +75,10 @@ class _$CoinDataMapDtoCopyWithImpl<$Res, $Val extends CoinDataMapDto>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ) as $Val);
   }
 }
@@ -81,7 +91,11 @@ abstract class _$$CoinDataMapDtoImplCopyWith<$Res>
       __$$CoinDataMapDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String symbol, String name});
+  $Res call(
+      {String id,
+      String symbol,
+      String name,
+      Map<String, dynamic> description});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$CoinDataMapDtoImplCopyWithImpl<$Res>
     Object? id = null,
     Object? symbol = null,
     Object? name = null,
+    Object? description = null,
   }) {
     return _then(_$CoinDataMapDtoImpl(
       id: null == id
@@ -112,6 +127,10 @@ class __$$CoinDataMapDtoImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value._description
+          : description // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -120,8 +139,12 @@ class __$$CoinDataMapDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CoinDataMapDtoImpl extends _CoinDataMapDto {
   const _$CoinDataMapDtoImpl(
-      {required this.id, required this.symbol, required this.name})
-      : super._();
+      {required this.id,
+      required this.symbol,
+      required this.name,
+      required final Map<String, dynamic> description})
+      : _description = description,
+        super._();
 
   factory _$CoinDataMapDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CoinDataMapDtoImplFromJson(json);
@@ -132,10 +155,17 @@ class _$CoinDataMapDtoImpl extends _CoinDataMapDto {
   final String symbol;
   @override
   final String name;
+  final Map<String, dynamic> _description;
+  @override
+  Map<String, dynamic> get description {
+    if (_description is EqualUnmodifiableMapView) return _description;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_description);
+  }
 
   @override
   String toString() {
-    return 'CoinDataMapDto(id: $id, symbol: $symbol, name: $name)';
+    return 'CoinDataMapDto(id: $id, symbol: $symbol, name: $name, description: $description)';
   }
 
   @override
@@ -145,12 +175,15 @@ class _$CoinDataMapDtoImpl extends _CoinDataMapDto {
             other is _$CoinDataMapDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other._description, _description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, symbol, name);
+  int get hashCode => Object.hash(runtimeType, id, symbol, name,
+      const DeepCollectionEquality().hash(_description));
 
   @JsonKey(ignore: true)
   @override
@@ -171,7 +204,8 @@ abstract class _CoinDataMapDto extends CoinDataMapDto {
   const factory _CoinDataMapDto(
       {required final String id,
       required final String symbol,
-      required final String name}) = _$CoinDataMapDtoImpl;
+      required final String name,
+      required final Map<String, dynamic> description}) = _$CoinDataMapDtoImpl;
   const _CoinDataMapDto._() : super._();
 
   factory _CoinDataMapDto.fromJson(Map<String, dynamic> json) =
@@ -184,164 +218,9 @@ abstract class _CoinDataMapDto extends CoinDataMapDto {
   @override
   String get name;
   @override
+  Map<String, dynamic> get description;
+  @override
   @JsonKey(ignore: true)
   _$$CoinDataMapDtoImplCopyWith<_$CoinDataMapDtoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-CoinDataRequestDto _$CoinDataRequestDtoFromJson(Map<String, dynamic> json) {
-  return _CoinDataRequestDto.fromJson(json);
-}
-
-/// @nodoc
-mixin _$CoinDataRequestDto {
-  String get vsCurrency => throw _privateConstructorUsedError;
-  int? get page => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $CoinDataRequestDtoCopyWith<CoinDataRequestDto> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CoinDataRequestDtoCopyWith<$Res> {
-  factory $CoinDataRequestDtoCopyWith(
-          CoinDataRequestDto value, $Res Function(CoinDataRequestDto) then) =
-      _$CoinDataRequestDtoCopyWithImpl<$Res, CoinDataRequestDto>;
-  @useResult
-  $Res call({String vsCurrency, int? page});
-}
-
-/// @nodoc
-class _$CoinDataRequestDtoCopyWithImpl<$Res, $Val extends CoinDataRequestDto>
-    implements $CoinDataRequestDtoCopyWith<$Res> {
-  _$CoinDataRequestDtoCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? vsCurrency = null,
-    Object? page = freezed,
-  }) {
-    return _then(_value.copyWith(
-      vsCurrency: null == vsCurrency
-          ? _value.vsCurrency
-          : vsCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      page: freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$CoinDataRequestDtoImplCopyWith<$Res>
-    implements $CoinDataRequestDtoCopyWith<$Res> {
-  factory _$$CoinDataRequestDtoImplCopyWith(_$CoinDataRequestDtoImpl value,
-          $Res Function(_$CoinDataRequestDtoImpl) then) =
-      __$$CoinDataRequestDtoImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String vsCurrency, int? page});
-}
-
-/// @nodoc
-class __$$CoinDataRequestDtoImplCopyWithImpl<$Res>
-    extends _$CoinDataRequestDtoCopyWithImpl<$Res, _$CoinDataRequestDtoImpl>
-    implements _$$CoinDataRequestDtoImplCopyWith<$Res> {
-  __$$CoinDataRequestDtoImplCopyWithImpl(_$CoinDataRequestDtoImpl _value,
-      $Res Function(_$CoinDataRequestDtoImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? vsCurrency = null,
-    Object? page = freezed,
-  }) {
-    return _then(_$CoinDataRequestDtoImpl(
-      vsCurrency: null == vsCurrency
-          ? _value.vsCurrency
-          : vsCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
-      page: freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
-class _$CoinDataRequestDtoImpl implements _CoinDataRequestDto {
-  const _$CoinDataRequestDtoImpl({required this.vsCurrency, this.page});
-
-  factory _$CoinDataRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CoinDataRequestDtoImplFromJson(json);
-
-  @override
-  final String vsCurrency;
-  @override
-  final int? page;
-
-  @override
-  String toString() {
-    return 'CoinDataRequestDto(vsCurrency: $vsCurrency, page: $page)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CoinDataRequestDtoImpl &&
-            (identical(other.vsCurrency, vsCurrency) ||
-                other.vsCurrency == vsCurrency) &&
-            (identical(other.page, page) || other.page == page));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, vsCurrency, page);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CoinDataRequestDtoImplCopyWith<_$CoinDataRequestDtoImpl> get copyWith =>
-      __$$CoinDataRequestDtoImplCopyWithImpl<_$CoinDataRequestDtoImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CoinDataRequestDtoImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _CoinDataRequestDto implements CoinDataRequestDto {
-  const factory _CoinDataRequestDto(
-      {required final String vsCurrency,
-      final int? page}) = _$CoinDataRequestDtoImpl;
-
-  factory _CoinDataRequestDto.fromJson(Map<String, dynamic> json) =
-      _$CoinDataRequestDtoImpl.fromJson;
-
-  @override
-  String get vsCurrency;
-  @override
-  int? get page;
-  @override
-  @JsonKey(ignore: true)
-  _$$CoinDataRequestDtoImplCopyWith<_$CoinDataRequestDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

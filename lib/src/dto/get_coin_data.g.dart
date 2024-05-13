@@ -11,6 +11,7 @@ _$CoinDataMapDtoImpl _$$CoinDataMapDtoImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       symbol: json['symbol'] as String,
       name: json['name'] as String,
+      description: json['description'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$$CoinDataMapDtoImplToJson(
@@ -19,18 +20,5 @@ Map<String, dynamic> _$$CoinDataMapDtoImplToJson(
       'id': instance.id,
       'symbol': instance.symbol,
       'name': instance.name,
-    };
-
-_$CoinDataRequestDtoImpl _$$CoinDataRequestDtoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CoinDataRequestDtoImpl(
-      vsCurrency: json['vs_currency'] as String,
-      page: (json['page'] as num?)?.toInt(),
-    );
-
-Map<String, dynamic> _$$CoinDataRequestDtoImplToJson(
-        _$CoinDataRequestDtoImpl instance) =>
-    <String, dynamic>{
-      'vs_currency': instance.vsCurrency,
-      'page': instance.page,
+      'description': instance.description,
     };

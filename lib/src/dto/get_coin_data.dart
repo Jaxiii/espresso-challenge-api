@@ -9,6 +9,7 @@ class CoinDataMapDto with _$CoinDataMapDto {
     required String id,
     required String symbol,
     required String name,
+    required Map<String, dynamic> description,
   }) = _CoinDataMapDto;
 
   const CoinDataMapDto._();
@@ -17,14 +18,13 @@ class CoinDataMapDto with _$CoinDataMapDto {
       _$CoinDataMapDtoFromJson(data);
 }
 
-@freezed
-class CoinDataRequestDto with _$CoinDataRequestDto {
-  // ignore: invalid_annotation_target, it's valid
-  @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory CoinDataRequestDto({
-    required String vsCurrency,
-    int? page,
-  }) = _CoinDataRequestDto;
-  factory CoinDataRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$CoinDataRequestDtoFromJson(json);
-}
+// @freezed
+// class CoinDataRequestDto with _$CoinDataRequestDto {
+//   // ignore: invalid_annotation_target, it's valid
+//   @JsonSerializable(fieldRename: FieldRename.snake)
+//   const factory CoinDataRequestDto({
+
+//   ,}) = _CoinDataRequestDto;
+//   factory CoinDataRequestDto.fromJson(Map<String, dynamic> json) =>
+//       _$CoinDataRequestDtoFromJson(json);
+// }

@@ -19,5 +19,14 @@ Map<String, dynamic> _$EspressoCashExceptionToJson(
     };
 
 const _$EspressoCashErrorEnumMap = {
-  EspressoCashError.genericError: 'GenericError',
+  EspressoCashError.generic: 'Generic',
+  EspressoCashError.notFound: 'NotFound',
+  EspressoCashError.nullReturn: 'NullReturn',
+  EspressoCashError.serviceUnavailable: 'ServiceUnavailable',
+  EspressoCashError.internalServer: 'InternalServer',
+  EspressoCashError.timeout: 'Timeout',
+  EspressoCashError.client: 'Client',
+  EspressoCashError.unauthorized: 'Unauthorized',
+  EspressoCashError.badRequest: 'BadRequest',
+  EspressoCashError.invalidResponse: 'InvalidResponse',
 };

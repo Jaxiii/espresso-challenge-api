@@ -60,9 +60,9 @@ class _CoinsClient implements CoinsClient {
   }
 
   @override
-  Future<List<CoinDataMapDto>> getCoinData(
+  Future<List<CoinMarketMapDto>> getCoinsListWithMarkets(
     String key,
-    CoinDataRequestDto request,
+    CoinMarketRequestDto request,
   ) async {
     final _extra = <String, dynamic>{
       'maxAge': Duration(
@@ -75,7 +75,7 @@ class _CoinsClient implements CoinsClient {
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<CoinDataMapDto>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<CoinMarketMapDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -92,8 +92,81 @@ class _CoinsClient implements CoinsClient {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => CoinDataMapDto.fromJson(i as Map<String, dynamic>))
+        .map(
+            (dynamic i) => CoinMarketMapDto.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<CoinDataMapDto> getCoinData(
+    String key,
+    String id,
+  ) async {
+    final _extra = <String, dynamic>{
+      'maxAge': Duration(
+        seconds: 10,
+      )
+    };
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'x-cg-demo-api-key': key};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CoinDataMapDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/coins/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = CoinDataMapDto.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<HistoricalPricesMapDto> getCoinMarkerChart(
+    String key,
+    String id,
+    HistoricalPricesRequestDto request,
+  ) async {
+    final _extra = <String, dynamic>{
+      'maxAge': Duration(
+        seconds: 10,
+      )
+    };
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(request.toJson());
+    final _headers = <String, dynamic>{r'x-cg-demo-api-key': key};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HistoricalPricesMapDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/coins/${id}/market_chart',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = HistoricalPricesMapDto.fromJson(_result.data!);
     return value;
   }
 
@@ -131,43 +204,6 @@ class _CoinsClient implements CoinsClient {
             ))));
     var value = _result.data!.map((k, dynamic v) =>
         MapEntry(k, PriceMapDto.fromJson(v as Map<String, dynamic>)));
-    return value;
-  }
-
-  @override
-  Future<HistoricalPricesMapDto> getHistoricalPrices(
-    String key,
-    String id,
-    HistoricalPricesRequestDto request,
-  ) async {
-    final _extra = <String, dynamic>{
-      'maxAge': Duration(
-        seconds: 10,
-      )
-    };
-    final queryParameters = <String, dynamic>{};
-    queryParameters.addAll(request.toJson());
-    final _headers = <String, dynamic>{r'x-cg-demo-api-key': key};
-    _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HistoricalPricesMapDto>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/coins/${id}/market_chart',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = HistoricalPricesMapDto.fromJson(_result.data!);
     return value;
   }
 

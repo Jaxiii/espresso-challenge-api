@@ -1,9 +1,6 @@
 import 'dart:io';
 
 import 'package:api/api.dart';
-import 'package:api/src/dto/get_coins.dart';
-import 'package:api/src/dto/get_historical_prices.dart';
-import 'package:api/src/dto/get_price.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.dart';
@@ -89,9 +86,24 @@ abstract class CoinsClient {
 
   @GET('/coins/markets')
   @Extra({maxAgeOption: Duration(seconds: 10)})
-  Future<List<CoinDataMapDto>> getCoinData(
+  Future<List<CoinMarketMapDto>> getCoinsListWithMarkets(
     @Header('x-cg-demo-api-key') String key,
-    @Queries() CoinDataRequestDto request,
+    @Queries() CoinMarketRequestDto request,
+  );
+
+  @GET('/coins/{id}')
+  @Extra({maxAgeOption: Duration(seconds: 10)})
+  Future<CoinDataMapDto> getCoinData(
+    @Header('x-cg-demo-api-key') String key,
+    @Path('id') String id,
+  );
+
+  @GET('/coins/{id}/market_chart')
+  @Extra({maxAgeOption: Duration(seconds: 10)})
+  Future<HistoricalPricesMapDto> getCoinMarkerChart(
+    @Header('x-cg-demo-api-key') String key,
+    @Path('id') String id,
+    @Queries() HistoricalPricesRequestDto request,
   );
 
   @GET('/simple/price')
@@ -99,13 +111,5 @@ abstract class CoinsClient {
   Future<Map<String, PriceMapDto>> getPrices(
     @Header('x-cg-demo-api-key') String key,
     @Queries() PriceRequestDto request,
-  );
-
-  @GET('/coins/{id}/market_chart')
-  @Extra({maxAgeOption: Duration(seconds: 10)})
-  Future<HistoricalPricesMapDto> getHistoricalPrices(
-    @Header('x-cg-demo-api-key') String key,
-    @Path('id') String id,
-    @Queries() HistoricalPricesRequestDto request,
   );
 }

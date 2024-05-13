@@ -8,10 +8,24 @@ class ErrorInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     EspressoCashError errorType;
     switch (err.response?.statusCode) {
+      case 400:
+        errorType = EspressoCashError.badRequest;
       case 404:
-        errorType = EspressoCashError.genericError;
+        errorType = EspressoCashError.notFound;
+      case 408:
+        errorType = EspressoCashError.timeout;
+      case 401:
+        errorType = EspressoCashError.unauthorized;
+      case 422:
+        errorType = EspressoCashError.client;
+      case 500:
+        errorType = EspressoCashError.internalServer;
+      case 503:
+        errorType = EspressoCashError.serviceUnavailable;
+      case 200:
+        errorType = EspressoCashError.invalidResponse;
       default:
-        errorType = EspressoCashError.genericError;
+        errorType = EspressoCashError.generic;
     }
     // Create your custom exception
     final customException = EspressoCashException(error: errorType);
@@ -40,5 +54,14 @@ class EspressoCashException implements Exception {
 
 @JsonEnum(fieldRename: FieldRename.pascal)
 enum EspressoCashError {
-  genericError,
+  generic,
+  notFound,
+  nullReturn,
+  serviceUnavailable,
+  internalServer,
+  timeout,
+  client,
+  unauthorized,
+  badRequest,
+  invalidResponse,
 }

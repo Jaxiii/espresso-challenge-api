@@ -1,7 +1,4 @@
 import 'package:api/api.dart';
-import 'package:api/src/dto/get_coins.dart';
-import 'package:api/src/dto/get_historical_prices.dart';
-import 'package:api/src/dto/get_price.dart';
 import 'package:dio/dio.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:test/test.dart';
@@ -60,6 +57,12 @@ void main() {
       );
     });
 
+    test('Fetch detailed coin data', () async {
+      final CoinDataMapDto coinDataResponse =
+          await client.getCoinData('<API-KEY>', 'bitcoin');
+      expect(coinDataResponse, isNotNull);
+    });
+
     test('Fetch price of Bitcoin in USD and validate structure', () async {
       const PriceRequestDto requestDto =
           PriceRequestDto(ids: ['bitcoin'], vsCurrencies: ['usd']);
@@ -86,7 +89,7 @@ void main() {
       const HistoricalPricesRequestDto requestDto =
           HistoricalPricesRequestDto(vsCurrency: 'usd', days: '1');
       final HistoricalPricesMapDto historicalPricesResponse =
-          await client.getHistoricalPrices('<API-KEY>', 'bitcoin', requestDto);
+          await client.getCoinMarkerChart('<API-KEY>', 'bitcoin', requestDto);
       expect(
         historicalPricesResponse.prices,
         isNotEmpty,
@@ -104,11 +107,12 @@ void main() {
       );
     });
 
-    test('Fetch detailed coin data and check response', () async {
-      const CoinDataRequestDto requestDto =
-          CoinDataRequestDto(vsCurrency: 'usd');
-      final List<CoinDataMapDto> coinDataResponse =
-          await client.getCoinData('<API-KEY>', requestDto);
+    test('Fetch detailed coins list with market data and check response',
+        () async {
+      const CoinMarketRequestDto requestDto =
+          CoinMarketRequestDto(vsCurrency: 'usd');
+      final List<CoinMarketMapDto> coinDataResponse =
+          await client.getCoinsListWithMarkets('<API-KEY>', requestDto);
       expect(coinDataResponse, isNotEmpty);
     });
   });
@@ -145,7 +149,7 @@ void main() {
         final espressoException = e.error! as EspressoCashException;
         expect(
           espressoException.error,
-          equals(EspressoCashError.genericError),
+          equals(EspressoCashError.notFound),
           reason: 'The error type should be genericError',
         );
       }
@@ -173,7 +177,7 @@ void main() {
         final espressoException = dioException.error! as EspressoCashException;
         expect(
           espressoException.error,
-          equals(EspressoCashError.genericError),
+          equals(EspressoCashError.internalServer),
           reason: 'The error type should be genericError',
         );
       }
@@ -207,7 +211,7 @@ void main() {
         final espressoException = dioException.error! as EspressoCashException;
         expect(
           espressoException.error,
-          equals(EspressoCashError.genericError),
+          equals(EspressoCashError.serviceUnavailable),
           reason: 'The error type should reflect a network failure condition',
         );
       }
