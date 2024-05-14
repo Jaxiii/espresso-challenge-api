@@ -12,6 +12,11 @@ _$CoinMarketMapDtoImpl _$$CoinMarketMapDtoImplFromJson(
       id: json['id'] as String,
       symbol: json['symbol'] as String,
       name: json['name'] as String,
+      image: json['image'] as String,
+      currentPrice: (json['current_price'] as num).toDouble(),
+      marketCap: (json['market_cap'] as num).toDouble(),
+      priceChangePercentage_24h:
+          (json['price_change_percentage_24h'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$CoinMarketMapDtoImplToJson(
@@ -20,6 +25,10 @@ Map<String, dynamic> _$$CoinMarketMapDtoImplToJson(
       'id': instance.id,
       'symbol': instance.symbol,
       'name': instance.name,
+      'image': instance.image,
+      'current_price': instance.currentPrice,
+      'market_cap': instance.marketCap,
+      'price_change_percentage_24h': instance.priceChangePercentage_24h,
     };
 
 _$CoinMarketRequestDtoImpl _$$CoinMarketRequestDtoImplFromJson(

@@ -5,10 +5,15 @@ part 'get_coin_data.g.dart';
 
 @freezed
 class CoinDataMapDto with _$CoinDataMapDto {
+  // ignore: invalid_annotation_target, it's valid
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory CoinDataMapDto({
     required String id,
     required String symbol,
     required String name,
+    required int marketCapRank,
+    required Map<String, dynamic> marketData,
+    required Map<String, dynamic> image,
     required Map<String, dynamic> description,
   }) = _CoinDataMapDto;
 

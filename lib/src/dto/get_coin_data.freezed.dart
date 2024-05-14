@@ -23,6 +23,9 @@ mixin _$CoinDataMapDto {
   String get id => throw _privateConstructorUsedError;
   String get symbol => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get marketCapRank => throw _privateConstructorUsedError;
+  Map<String, dynamic> get marketData => throw _privateConstructorUsedError;
+  Map<String, dynamic> get image => throw _privateConstructorUsedError;
   Map<String, dynamic> get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,6 +44,9 @@ abstract class $CoinDataMapDtoCopyWith<$Res> {
       {String id,
       String symbol,
       String name,
+      int marketCapRank,
+      Map<String, dynamic> marketData,
+      Map<String, dynamic> image,
       Map<String, dynamic> description});
 }
 
@@ -60,6 +66,9 @@ class _$CoinDataMapDtoCopyWithImpl<$Res, $Val extends CoinDataMapDto>
     Object? id = null,
     Object? symbol = null,
     Object? name = null,
+    Object? marketCapRank = null,
+    Object? marketData = null,
+    Object? image = null,
     Object? description = null,
   }) {
     return _then(_value.copyWith(
@@ -75,6 +84,18 @@ class _$CoinDataMapDtoCopyWithImpl<$Res, $Val extends CoinDataMapDto>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      marketCapRank: null == marketCapRank
+          ? _value.marketCapRank
+          : marketCapRank // ignore: cast_nullable_to_non_nullable
+              as int,
+      marketData: null == marketData
+          ? _value.marketData
+          : marketData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -95,6 +116,9 @@ abstract class _$$CoinDataMapDtoImplCopyWith<$Res>
       {String id,
       String symbol,
       String name,
+      int marketCapRank,
+      Map<String, dynamic> marketData,
+      Map<String, dynamic> image,
       Map<String, dynamic> description});
 }
 
@@ -112,6 +136,9 @@ class __$$CoinDataMapDtoImplCopyWithImpl<$Res>
     Object? id = null,
     Object? symbol = null,
     Object? name = null,
+    Object? marketCapRank = null,
+    Object? marketData = null,
+    Object? image = null,
     Object? description = null,
   }) {
     return _then(_$CoinDataMapDtoImpl(
@@ -127,6 +154,18 @@ class __$$CoinDataMapDtoImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      marketCapRank: null == marketCapRank
+          ? _value.marketCapRank
+          : marketCapRank // ignore: cast_nullable_to_non_nullable
+              as int,
+      marketData: null == marketData
+          ? _value._marketData
+          : marketData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      image: null == image
+          ? _value._image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       description: null == description
           ? _value._description
           : description // ignore: cast_nullable_to_non_nullable
@@ -136,14 +175,20 @@ class __$$CoinDataMapDtoImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$CoinDataMapDtoImpl extends _CoinDataMapDto {
   const _$CoinDataMapDtoImpl(
       {required this.id,
       required this.symbol,
       required this.name,
+      required this.marketCapRank,
+      required final Map<String, dynamic> marketData,
+      required final Map<String, dynamic> image,
       required final Map<String, dynamic> description})
-      : _description = description,
+      : _marketData = marketData,
+        _image = image,
+        _description = description,
         super._();
 
   factory _$CoinDataMapDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -155,6 +200,24 @@ class _$CoinDataMapDtoImpl extends _CoinDataMapDto {
   final String symbol;
   @override
   final String name;
+  @override
+  final int marketCapRank;
+  final Map<String, dynamic> _marketData;
+  @override
+  Map<String, dynamic> get marketData {
+    if (_marketData is EqualUnmodifiableMapView) return _marketData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_marketData);
+  }
+
+  final Map<String, dynamic> _image;
+  @override
+  Map<String, dynamic> get image {
+    if (_image is EqualUnmodifiableMapView) return _image;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_image);
+  }
+
   final Map<String, dynamic> _description;
   @override
   Map<String, dynamic> get description {
@@ -165,7 +228,7 @@ class _$CoinDataMapDtoImpl extends _CoinDataMapDto {
 
   @override
   String toString() {
-    return 'CoinDataMapDto(id: $id, symbol: $symbol, name: $name, description: $description)';
+    return 'CoinDataMapDto(id: $id, symbol: $symbol, name: $name, marketCapRank: $marketCapRank, marketData: $marketData, image: $image, description: $description)';
   }
 
   @override
@@ -176,13 +239,25 @@ class _$CoinDataMapDtoImpl extends _CoinDataMapDto {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.marketCapRank, marketCapRank) ||
+                other.marketCapRank == marketCapRank) &&
+            const DeepCollectionEquality()
+                .equals(other._marketData, _marketData) &&
+            const DeepCollectionEquality().equals(other._image, _image) &&
             const DeepCollectionEquality()
                 .equals(other._description, _description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, symbol, name,
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      symbol,
+      name,
+      marketCapRank,
+      const DeepCollectionEquality().hash(_marketData),
+      const DeepCollectionEquality().hash(_image),
       const DeepCollectionEquality().hash(_description));
 
   @JsonKey(ignore: true)
@@ -205,6 +280,9 @@ abstract class _CoinDataMapDto extends CoinDataMapDto {
       {required final String id,
       required final String symbol,
       required final String name,
+      required final int marketCapRank,
+      required final Map<String, dynamic> marketData,
+      required final Map<String, dynamic> image,
       required final Map<String, dynamic> description}) = _$CoinDataMapDtoImpl;
   const _CoinDataMapDto._() : super._();
 
@@ -217,6 +295,12 @@ abstract class _CoinDataMapDto extends CoinDataMapDto {
   String get symbol;
   @override
   String get name;
+  @override
+  int get marketCapRank;
+  @override
+  Map<String, dynamic> get marketData;
+  @override
+  Map<String, dynamic> get image;
   @override
   Map<String, dynamic> get description;
   @override

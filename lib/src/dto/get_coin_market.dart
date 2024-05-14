@@ -5,10 +5,16 @@ part 'get_coin_market.g.dart';
 
 @freezed
 class CoinMarketMapDto with _$CoinMarketMapDto {
+  // ignore: invalid_annotation_target, it's valid
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory CoinMarketMapDto({
     required String id,
     required String symbol,
     required String name,
+    required String image,
+    required double currentPrice,
+    required double marketCap,
+    required double priceChangePercentage_24h,
   }) = _CoinMarketMapDto;
 
   const CoinMarketMapDto._();
